@@ -6,10 +6,10 @@ from account.managers import UserManager
 
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(_('email address'), unique=True)
-    username = models.CharField(max_length=100, blank=True)
     first_name = models.CharField(_('first name'), max_length=150)
     last_name = models.CharField(_('last name'), max_length=150)
+    username = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(_('email address'), unique=True)
     activation_code = models.CharField(max_length=255, blank=True)
     avatar = models.ImageField(upload_to='avatars', blank=True, default='avatars/default_avatar.jpg')
     is_active = models.BooleanField(

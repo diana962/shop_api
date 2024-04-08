@@ -29,9 +29,9 @@ class UserViewSet(ListModelMixin, GenericViewSet):
             send_confirm_email(user.email, user.activation_code)
         except Exception as e:
             print(e, '!!!!!!!!!!!!!!!!!!')
-            return Response({'msg':'Registered, but troubles with email occured!',
+            return Response({'msg': 'Registered, but troubles with email occured!',
                              'data': serializer.data}, status=201)
-        return Response({'msg':'Registered and sent email', 'data': serializer.data}, status=201)
+        return Response({'msg': 'Registered and sent email', 'data': serializer.data}, status=201)
 
     @action(['GET'], detail=False, url_path='activate/(?P<uuid>[0-9A-Fa-f-]+)')
     def activate(self, request, uuid):
