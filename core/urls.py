@@ -8,8 +8,10 @@ from category.views import CategoryViewSet
 
 router = SimpleRouter()
 router.register('category', CategoryViewSet)
+# router.register('products', )
 
 urlpatterns = [
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
     path('admin/', admin.site.urls),
     path('api/v1/accounts/', include('account.urls')),
     path('api/v1/', include(router.urls))
