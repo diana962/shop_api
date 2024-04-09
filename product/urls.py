@@ -1,7 +1,7 @@
-# from django.urls import path, include
-# from . import views
+from django.urls import path, include
+from . import views
 
 
-# urlpatterns = [
-#     path('', views..as_view()),
-# ]
+urlpatterns = [
+    path('', views.ProductViewSet.as_view()),
+]

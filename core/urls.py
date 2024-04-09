@@ -5,10 +5,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from category.views import CategoryViewSet
+from product.views import ProductViewSet
 
 router = SimpleRouter()
 router.register('category', CategoryViewSet)
-# router.register('products', )
+router.register('products', ProductViewSet)
 
 urlpatterns = [
     path('ckeditor5/', include('django_ckeditor_5.urls')),
