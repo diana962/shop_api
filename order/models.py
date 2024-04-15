@@ -1,9 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from product.models import Product
+from core.tasks import send_notification_task
 
 User = get_user_model()
+
 
 PROCESSING_CHOICES = (
     ('ORDERED', 'Ordered'),
@@ -20,6 +24,7 @@ class OrderItem(models.Model):
     def __str__(self):
         return f'{self.product.title} --> {self.order}'
 
+
 class Order(models.Model):
     owner = models.ForeignKey(User, related_name="orders", on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through=OrderItem)
@@ -34,3 +39,7 @@ class Order(models.Model):
         return f'{self.id} - {self.owner}'
 
 
+@receiver(post_save, sender=Order)
+def order_post_save(sender, instance, created, *args, **kwargs):
+    if created:
+        send_notification_task.delay(instance.owner.email, instance.id, instance.total_sum)
