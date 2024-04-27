@@ -15,6 +15,7 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
+
 @receiver(pre_save, sender=Category)
 def category_pre_save(sender, instance, *args, **kwargs):
     print('WORKED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')

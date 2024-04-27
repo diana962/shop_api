@@ -10,3 +10,5 @@ drf-yasg
 celery
 redis
 gunicorn
+
+django-cors-headers
